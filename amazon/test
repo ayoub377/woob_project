@@ -1,3 +1,5 @@
+
+
 def _setup_driver(self, preferences):
         # Create a Proxy object
         proxy = Proxy()
@@ -35,41 +37,8 @@ def _setup_driver(self, preferences):
             service=chrome_service
         )
 
-Dahbi — Today at 5:52 PM
 
-def _setup_driver(self, preferences):
-        # Create a Proxy object
-        proxy = Proxy()
 
-        # Set the proxy URL (replace with your actual proxy URL)
-        proxy_url = "http://119.0.6045.105:9515"
-        print(f"Kacm  proxy: {proxy_url}")
-
-        proxy.http_proxy = proxy_url
-        proxy.ssl_proxy = proxy_url
-
-        # Create a dictionary with the proxy settings
-        proxy_dict = {
-            "proxyType": "MANUAL",
-            "httpProxy": proxy_url,
-            "sslProxy": proxy_url,
-        }
-
-        # Create ChromeOptions and add the proxy settings
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--proxy-server=%s' % proxy_url)
-        chrome_options.add_argument('--window-size=1720,1080')
-        chrome_options.add_argument('enable-automation')
-        chrome_options.add_argument('disable-infobars')
-        chrome_options.add_argument('--disable-gpu')
-        # Create a ChromeService instance (use your ChromeDriver path)
-        chrome_service = ChromeService(executable_path='C://Windows//chromedriver.exe')
-
-        # Create a Chrome WebDriver with the configured options and service
-        self.driver = webdriver.Chrome(
-            options=chrome_options,
-            service=chrome_service
-        )
 Dahbi — Today at 5:52 PM
 
 # -*- coding: utf-8 -*-
