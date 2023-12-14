@@ -1,0 +1,149 @@
+def _setup_driver(self, preferences):
+        # Create a Proxy object
+        proxy = Proxy()
+
+        # Set the proxy URL (replace with your actual proxy URL)
+        proxy_url = "http://119.0.6045.105:9515"
+        print(f"Kacm  proxy: {proxy_url}")
+
+        proxy.http_proxy = proxy_url
+        proxy.ssl_proxy = proxy_url
+
+        # Create a dictionary with the proxy settings
+        proxy_dict = {
+            "proxyType": "MANUAL",
+            "httpProxy": proxy_url,
+            "sslProxy": proxy_url
+        }
+
+        # Create ChromeOptions and add the proxy settings
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--proxy-server=%s' % proxy_url)
+        chrome_options.add_argument('--window-size=1720,1080')
+        chrome_options.add_argument("enable-automation")
+        chrome_options.add_argument("disable-infobars")
+        chrome_options.add_argument('--disable-gpu')
+
+        chrome_options.add_experimental_option("useAutomationExtension", False)
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        # Create a ChromeService instance (use your ChromeDriver path)
+        chrome_service = ChromeService(executable_path='C:\Windows\chromedriver.exe')
+
+        # Create a Chrome WebDriver with the configured options and service
+        self.driver = webdriver.Chrome(
+            options=chrome_options,
+            service=chrome_service
+        )
+
+Dahbi — Today at 5:52 PM
+
+def _setup_driver(self, preferences):
+        # Create a Proxy object
+        proxy = Proxy()
+
+        # Set the proxy URL (replace with your actual proxy URL)
+        proxy_url = "http://119.0.6045.105:9515"
+        print(f"Kacm  proxy: {proxy_url}")
+
+        proxy.http_proxy = proxy_url
+        proxy.ssl_proxy = proxy_url
+
+        # Create a dictionary with the proxy settings
+        proxy_dict = {
+            "proxyType": "MANUAL",
+            "httpProxy": proxy_url,
+            "sslProxy": proxy_url,
+        }
+
+        # Create ChromeOptions and add the proxy settings
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--proxy-server=%s' % proxy_url)
+        chrome_options.add_argument('--window-size=1720,1080')
+        chrome_options.add_argument('enable-automation')
+        chrome_options.add_argument('disable-infobars')
+        chrome_options.add_argument('--disable-gpu')
+        # Create a ChromeService instance (use your ChromeDriver path)
+        chrome_service = ChromeService(executable_path='C://Windows//chromedriver.exe')
+
+        # Create a Chrome WebDriver with the configured options and service
+        self.driver = webdriver.Chrome(
+            options=chrome_options,
+            service=chrome_service
+        )
+Dahbi — Today at 5:52 PM
+
+# -*- coding: utf-8 -*-
+
+from woob.core import Woob
+from .module import CIHModule
+# from selenium.common.exceptions import NoSuchElementException, TimeoutException
+# from woob.browser.selenium import SeleniumBrowser, webdriver
+# def _setup_driver(self, preferences):
+#         # Create a Proxy object
+#         proxy = Proxy()
+
+#         # Set the proxy URL (replace with your actual proxy URL)
+#         proxy_url = "http://119.0.6045.105:9515"
+#         print(f"Kacm  proxy: {proxy_url}")
+
+#         proxy.http_proxy = proxy_url
+#         proxy.ssl_proxy = proxy_url
+
+#         # Create a dictionary with the proxy settings
+#         proxy_dict = {
+#             "proxyType": "MANUAL",
+#             "httpProxy": proxy_url,
+#             "sslProxy": proxy_url
+#         }
+
+#         # Create ChromeOptions and add the proxy settings
+#         chrome_options = webdriver.ChromeOptions()
+#         chrome_options.add_argument('--proxy-server=%s' % proxy_url)
+#         chrome_options.add_argument('--window-size=1720,1080')
+#         chrome_options.add_argument("enable-automation")
+#         chrome_options.add_argument("disable-infobars")
+#         # Create a ChromeService instance (use your ChromeDriver path)
+#         chrome_service = ChromeService(executable_path='C:\\Windows\\chromedriver.exe')
+
+#         # Create a Chrome WebDriver with the configured options and service
+#         self.driver = webdriver.Chrome(
+#             options=chrome_options,
+#             service=chrome_service
+#         )
+
+def main():
+
+    # Initialize the Woob instance
+    woob_instance = Woob()
+
+    # Create an instance of the CIH module with the configuration
+    cih_module = CIHModule(woob_instance, 'cih', config={
+        'login': '12457854',
+        'password': '955214',
+    })
+
+    # Create a browser instance after configuring the module
+    browser = cih_module.create_default_browser()
+
+    try:
+        print('hiha')
+        # Login to the website
+        browser.do_login()
+    except Exception as e:
+        print(f"Error during login: {e}")
+        raise  # Raise the exception to see the full traceback
+
+    # Retrieve and print account information
+    for account in cih_module.iter_accounts():
+        print(f"Account ID: {account['id']}")
+        print(f"Balance: {account['balance']} {account['currency']}")
+        print(f"Type: {account['type']}")
+        print(f"Label: {account['label']}")
+        print("\n")
+
+    # Rest of your code...
+
+    # Logout from the website
+
+if __name__ == "__main__":
+    main()
